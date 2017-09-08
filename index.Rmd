@@ -44,3 +44,12 @@ WHERE teamID='PHI' and HR>30 and yearID<=1979 and yearID>=1970"
 sqldf(query)
 ```
 
+Suppose now I would like to find every instance of a player hitting more than 50 homeruns. Let's have the players with the highest homerun total at the top.
+
+```{r}
+query<-"SELECT playerID,yearID,teamID,HR FROM Batting
+WHERE HR>50
+ORDER BY HR DESC"
+sqldf(query)
+```
+
