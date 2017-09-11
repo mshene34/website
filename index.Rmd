@@ -53,3 +53,45 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 
+Find all instances of a player striking out less than 10 times. Make sure each player has had at least 400 at bats (AB). Order by having the least strikeouts at the top.
+
+
+```{r}
+query<-"SELECT playerID,yearID,teamID,SO,AB FROM Batting
+WHERE SO<10 and AB>=400
+ORDER BY SO"
+sqldf(query)
+```
+
+Find Babe Ruth's career homerun total.
+
+
+```{r}
+query<-"SELECT playerID,sum(HR) FROM Batting
+WHERE playerID='ruthba01'
+GROUP BY playerID"
+sqldf(query)
+```
+
+Find the career homerun totals for all players, but limit the output to totals of 600 or more. Order by career total.
+
+
+```{r}
+query<-"SELECT playerID,sum(HR) FROM Batting
+GROUP BY playerID
+HAVING sum(HR)>=600
+ORDER BY sum(HR) DESC"
+sqldf(query)
+```
+
+Find the players who have averaged more than 30 homeruns per year throughout their career. Let's order by having the highest average at the top.
+
+
+```{r}
+query<-"SELECT playerID,avg(HR) FROM Batting
+GROUP BY playerID
+HAVING avg(HR)>30
+ORDER BY avg(HR) DESC"
+sqldf(query)
+```
+
