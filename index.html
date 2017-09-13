@@ -392,6 +392,108 @@ sqldf(query)</code></pre>
 ## 11 rodrial01 31.63636
 ## 12 schmimi01 30.44444
 ## 13 abreujo02 30.33333</code></pre>
+<p>Find first and last names, along with teamID, yearID, HR, and player should be Babe Ruth.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,teamID,yearID,HR
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE Batting.playerID='ruthba01'&quot;
+sqldf(query)</code></pre>
+<pre><code>##    nameFirst nameLast teamID yearID HR
+## 1       Babe     Ruth    BOS   1914  0
+## 2       Babe     Ruth    BOS   1915  4
+## 3       Babe     Ruth    BOS   1916  3
+## 4       Babe     Ruth    BOS   1917  2
+## 5       Babe     Ruth    BOS   1918 11
+## 6       Babe     Ruth    BOS   1919 29
+## 7       Babe     Ruth    NYA   1920 54
+## 8       Babe     Ruth    NYA   1921 59
+## 9       Babe     Ruth    NYA   1922 35
+## 10      Babe     Ruth    NYA   1923 41
+## 11      Babe     Ruth    NYA   1924 46
+## 12      Babe     Ruth    NYA   1925 25
+## 13      Babe     Ruth    NYA   1926 47
+## 14      Babe     Ruth    NYA   1927 60
+## 15      Babe     Ruth    NYA   1928 54
+## 16      Babe     Ruth    NYA   1929 46
+## 17      Babe     Ruth    NYA   1930 49
+## 18      Babe     Ruth    NYA   1931 46
+## 19      Babe     Ruth    NYA   1932 41
+## 20      Babe     Ruth    NYA   1933 34
+## 21      Babe     Ruth    NYA   1934 22
+## 22      Babe     Ruth    BSN   1935  6</code></pre>
+<p>Find all instances of players hitting more than 50 homeruns. Include first and last names, team, year, and homeruns.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT nameFirst,nameLast,yearID,teamID,HR
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE HR&gt;50
+ORDER BY HR DESC&quot;
+sqldf(query)</code></pre>
+<pre><code>##    nameFirst  nameLast yearID teamID HR
+## 1      Barry     Bonds   2001    SFN 73
+## 2       Mark   McGwire   1998    SLN 70
+## 3      Sammy      Sosa   1998    CHN 66
+## 4       Mark   McGwire   1999    SLN 65
+## 5      Sammy      Sosa   2001    CHN 64
+## 6      Sammy      Sosa   1999    CHN 63
+## 7      Roger     Maris   1961    NYA 61
+## 8       Babe      Ruth   1927    NYA 60
+## 9       Babe      Ruth   1921    NYA 59
+## 10    Jimmie      Foxx   1932    PHA 58
+## 11      Hank Greenberg   1938    DET 58
+## 12      Ryan    Howard   2006    PHI 58
+## 13      Luis  Gonzalez   2001    ARI 57
+## 14      Alex Rodriguez   2002    TEX 57
+## 15      Hack    Wilson   1930    CHN 56
+## 16       Ken   Griffey   1997    SEA 56
+## 17       Ken   Griffey   1998    SEA 56
+## 18      Babe      Ruth   1920    NYA 54
+## 19      Babe      Ruth   1928    NYA 54
+## 20     Ralph     Kiner   1949    PIT 54
+## 21    Mickey    Mantle   1961    NYA 54
+## 22     David     Ortiz   2006    BOS 54
+## 23      Alex Rodriguez   2007    NYA 54
+## 24      Jose  Bautista   2010    TOR 54
+## 25     Chris     Davis   2013    BAL 53
+## 26    Mickey    Mantle   1956    NYA 52
+## 27    Willie      Mays   1965    SFN 52
+## 28    George    Foster   1977    CIN 52
+## 29      Mark   McGwire   1996    OAK 52
+## 30      Alex Rodriguez   2001    TEX 52
+## 31       Jim     Thome   2002    CLE 52
+## 32     Ralph     Kiner   1947    PIT 51
+## 33    Johnny      Mize   1947    NY1 51
+## 34    Willie      Mays   1955    NY1 51
+## 35     Cecil   Fielder   1990    DET 51
+## 36    Andruw     Jones   2005    ATL 51</code></pre>
+<p>With team name displayed, find homeruns by season for Babe Ruth.</p>
+<pre class="r"><code>query&lt;-&quot;SELECT playerID,name,Batting.yearID,Batting.HR
+FROM Batting INNER JOIN Teams
+ON Batting.teamID=Teams.teamID and Batting.yearID=Teams.yearID
+WHERE playerID='ruthba01'&quot;
+sqldf(query)</code></pre>
+<pre><code>##    playerID             name yearID HR
+## 1  ruthba01   Boston Red Sox   1914  0
+## 2  ruthba01   Boston Red Sox   1915  4
+## 3  ruthba01   Boston Red Sox   1916  3
+## 4  ruthba01   Boston Red Sox   1917  2
+## 5  ruthba01   Boston Red Sox   1918 11
+## 6  ruthba01   Boston Red Sox   1919 29
+## 7  ruthba01 New York Yankees   1920 54
+## 8  ruthba01 New York Yankees   1921 59
+## 9  ruthba01 New York Yankees   1922 35
+## 10 ruthba01 New York Yankees   1923 41
+## 11 ruthba01 New York Yankees   1924 46
+## 12 ruthba01 New York Yankees   1925 25
+## 13 ruthba01 New York Yankees   1926 47
+## 14 ruthba01 New York Yankees   1927 60
+## 15 ruthba01 New York Yankees   1928 54
+## 16 ruthba01 New York Yankees   1929 46
+## 17 ruthba01 New York Yankees   1930 49
+## 18 ruthba01 New York Yankees   1931 46
+## 19 ruthba01 New York Yankees   1932 41
+## 20 ruthba01 New York Yankees   1933 34
+## 21 ruthba01 New York Yankees   1934 22
+## 22 ruthba01    Boston Braves   1935  6</code></pre>
 </div>
 
 
